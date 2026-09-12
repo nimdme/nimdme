@@ -1,5 +1,5 @@
 
-**Systems · Infrastructure · Software**
+**Systems · Infrastructure · Software · Research**
 
 I like understanding how things work under the hood — and occasionally breaking them to find out.
 
@@ -11,5 +11,5 @@ When I'm not doing that, I'm making music, drinking coffee, or jotting things do
 
 [Website](https://nimd.me) · [Blog](https://nimd.me/blog) · [Journal](https://nimd.me/journal) · [Resume](https://nimd.me/resume)
 
-[Email](https://nimd.me/?email) . [LinkedIn](https://go.nimd.me/linkedin) · [YouTube](https://go.nimd.me/yt)
+[Email](https://nimd.me/?email) · [LinkedIn](https://go.nimd.me/linkedin) · [YouTube](https://go.nimd.me/yt)
 
