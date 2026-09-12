@@ -1,26 +1,53 @@
-<h1 align="center">Hi 👋, I'm Niranjan MD</h1>
-<h3 align="center">I spend my time breaking and rebuilding things to see how they actually work under the hood. Usually found messing around with Linux internals, homelab container stacks, networking protocols, or writing backend tools in Go, Python, and C or just sipping coffe, making music or jotting down pointless stuff in my [journal](https://nimd.me/journal)</h3>
+# Niranjan MD
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=nimdme&label=Profile%20views&color=0e75b6&style=flat" alt="nimdme" /> </p>
+**Systems · Infrastructure · Software**
 
-- 👨‍💻 All of my projects are available at [nimd.me](nimd.me)
+I like understanding how things work under the hood — and occasionally breaking them to find out.
 
-- 📝 I regularly write articles on [nimd.me/blog](nimd.me/blog)
+Most of my time goes into Linux, homelabs, networking, backend systems, and building tools that solve problems I probably could have avoided.
 
-- 📫 How to reach me **mail@niranjanmd.com**
+When I'm not doing that, I'm making music, drinking coffee, or writing things down.
 
-- 📄 Know about my experiences [nimd.me/resume](nimd.me/resume)
+<br>
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://linkedin.com/in/niranjanmd" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="niranjanmd" height="30" width="40" /></a>
-<a href="https://dribbble.com/nimd" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/dribbble.svg" alt="nimd" height="30" width="40" /></a>
-<a href="https://www.youtube.com/c/nimdme" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="nimdme" height="30" width="40" /></a>
-</p>
+[Website](https://nimd.me) · [Blog](https://nimd.me/blog) · [Journal](https://nimd.me/journal) · [Resume](https://nimd.me/resume) · [Email](mailto:mail@niranjanmd.com)
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://azure.microsoft.com/en-in/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg" alt="azure" width="40" height="40"/> </a> <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://cloud.google.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://golang.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg" alt="go" width="40" height="40"/> </a> <a href="https://grafana.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg" alt="grafana" width="40" height="40"/> </a> <a href="https://heroku.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" alt="heroku" width="40" height="40"/> </a> <a href="https://gohugo.io/" target="_blank" rel="noreferrer"> <img src="https://api.iconify.design/logos-hugo.svg" alt="hugo" width="40" height="40"/> </a> <a href="https://jekyllrb.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jekyllrb/jekyllrb-icon.svg" alt="jekyll" width="40" height="40"/> </a> <a href="https://kubernetes.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg" alt="kubernetes" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://mariadb.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/mariadb/mariadb-icon.svg" alt="mariadb" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg" alt="nginx" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a> </p>
+[LinkedIn](https://linkedin.com/in/niranjanmd) · [Dribbble](https://dribbble.com/nimd) · [YouTube](https://www.youtube.com/c/nimdme)
 
-<h3 align="left">Support:</h3>
-<p><a href="https://ko-fi.com/nimd"> <img align="left" src="https://cdn.ko-fi.com/cdn/kofi3.png?v=3" height="50" width="210" alt="nimd" /></a></p><br><br>
+---
 
+## What I'm into
+
+* Linux and systems
+* Homelabs and self-hosting
+* Networking and infrastructure
+* Backend engineering
+* Understanding things from first principles
+
+## Tools I use
+
+**Languages**
+
+[![C](https://img.shields.io/badge/C-111827?style=flat-square\&logo=c\&logoColor=white)](https://www.cprogramming.com/)
+[![Go](https://img.shields.io/badge/Go-111827?style=flat-square\&logo=go\&logoColor=white)](https://go.dev/)
+[![Python](https://img.shields.io/badge/Python-111827?style=flat-square\&logo=python\&logoColor=white)](https://www.python.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-111827?style=flat-square\&logo=javascript\&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+**Infrastructure**
+
+[![Linux](https://img.shields.io/badge/Linux-111827?style=flat-square\&logo=linux\&logoColor=white)](https://www.linux.org/)
+[![Docker](https://img.shields.io/badge/Docker-111827?style=flat-square\&logo=docker\&logoColor=white)](https://www.docker.com/)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-111827?style=flat-square\&logo=kubernetes\&logoColor=white)](https://kubernetes.io/)
+[![Nginx](https://img.shields.io/badge/Nginx-111827?style=flat-square\&logo=nginx\&logoColor=white)](https://nginx.org/)
+[![AWS](https://img.shields.io/badge/AWS-111827?style=flat-square\&logo=amazonwebservices\&logoColor=white)](https://aws.amazon.com/)
+
+**Databases & tooling**
+
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-111827?style=flat-square\&logo=postgresql\&logoColor=white)](https://www.postgresql.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-111827?style=flat-square\&logo=mongodb\&logoColor=white)](https://www.mongodb.com/)
+[![Git](https://img.shields.io/badge/Git-111827?style=flat-square\&logo=git\&logoColor=white)](https://git-scm.com/)
+[![Grafana](https://img.shields.io/badge/Grafana-111827?style=flat-square\&logo=grafana\&logoColor=white)](https://grafana.com/)
+
+---
+
+<sub>Most of my projects → [nimd.me](https://nimd.me)</sub>
