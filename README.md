@@ -99,12 +99,9 @@ and occasionally breaking them to find out.
   <img width="49%" src="https://github-stats-extended.vercel.app/api/top-langs/?username=nimdme&layout=compact&card_width=495&hide_border=true&bg_color=162632&title_color=f08a5d&text_color=fdebe5" alt="Top languages">
 </p>
 
-<!-- Needs the snake.yml workflow in .github/workflows/ to generate the output branch -->
+<!-- Needs the garden.yml workflow in .github/workflows/ to generate the output branch -->
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nimdme/nimdme/output/github-snake-dark.svg">
-    <img width="100%" alt="Contribution graph eaten by a snake" src="https://raw.githubusercontent.com/nimdme/nimdme/output/github-snake.svg">
-  </picture>
+  <img width="100%" src="https://raw.githubusercontent.com/nimdme/nimdme/output/contribution-garden.svg" alt="My contribution graph, grown into a garden of flowers">
 </p>
 
 <p align="center">
