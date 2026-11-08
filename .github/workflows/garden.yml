@@ -1,4 +1,4 @@
-name: Update contribution garden
+name: Update profile art
 
 on:
   schedule:
@@ -15,6 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Build the banner for today's season or festival
+        run: python3 scripts/banner.py --out dist/banner.svg --readme README.md
+
+      - name: Commit the festival caption if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || (git commit -m "Update festival caption" && git push)
 
       - name: Build the garden
         run: python3 scripts/garden.py --out dist/contribution-garden.svg

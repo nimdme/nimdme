@@ -1,10 +1,19 @@
-
+<!--
+  Setup: replace every nimdme below with your GitHub username.
+  Put this file at the root of the repo named exactly like your username.
+  The banner and contribution garden are built by .github/workflows/garden.yml
+  and published to the "output" branch; run that workflow once after setup.
+-->
 
 <div align="center">
 
 <a href="https://nimd.me">
-  <img src="./assets/banner.svg" alt="Niranjan MD. Systems, art, research, life." width="100%">
+  <img src="https://raw.githubusercontent.com/nimdme/nimdme/output/banner.svg" alt="Niranjan MD. Systems, art, research, life." width="100%">
 </a>
+
+<!-- festival:start -->
+<p align="center"><sub><i>Today’s banner celebrates Deepavali, the festival of lights.</i> <a href="https://en.wikipedia.org/wiki/Diwali">Read more on Wikipedia</a></sub></p>
+<!-- festival:end -->
 
 <a href="https://github.com/nimdme">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3200&pause=1200&color=F08A5D&center=true&vCenter=true&width=640&height=40&lines=Linux%2C+networking%2C+backend+systems.;Homelabs+that+probably+didn%27t+need+to+exist.;Tools+for+problems+I+could+have+avoided.;Music%2C+coffee%2C+and+a+journal." alt="Typing animation of my interests">
