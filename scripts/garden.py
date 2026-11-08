@@ -65,10 +65,10 @@ def levels(counts):
 def symbols():
     def petals(n, cy, rx, ry, op=1, extra=""):
         return "".join(f'<ellipse cx="0" cy="{f(cy)}" rx="{f(rx)}" ry="{f(ry)}" transform="rotate({f(k*360/n)})" opacity="{op}"{extra}/>' for k in range(n))
-    s1 = (f'<symbol id="s1" overflow="visible"><path d="M0,4 L0,-1" stroke="{SAGE}" stroke-width="1.2" stroke-linecap="round" fill="none"/>'
-          f'<ellipse cx="-2.2" cy="1.6" rx="2.3" ry="1" transform="rotate(-35 -2.2 1.6)" fill="{SAGE}"/>'
-          f'<ellipse cx="2.2" cy="0.6" rx="2.3" ry="1" transform="rotate(35 2.2 0.6)" fill="{SAGE}"/>'
-          f'<circle cx="0" cy="-2.6" r="2.3" fill="currentColor"/></symbol>')
+    s1 = (f'<symbol id="s1" overflow="visible"><path d="M0,6 L0,-2" stroke="{SAGE}" stroke-width="1.4" stroke-linecap="round" fill="none"/>'
+          f'<ellipse cx="-2.6" cy="2.6" rx="2.6" ry="1.2" transform="rotate(-30 -2.6 2.6)" fill="{SAGE}"/>'
+          f'<ellipse cx="2.6" cy="1.4" rx="2.6" ry="1.2" transform="rotate(30 2.6 1.4)" fill="{SAGE}"/>'
+          f'<ellipse cx="0" cy="-4" rx="2.4" ry="3.2" fill="currentColor"/></symbol>')
     s2 = (f'<symbol id="s2" overflow="visible"><g fill="currentColor">{petals(5,-3.4,2.2,3.6)}</g>'
           f'<circle r="1.7" fill="#f6c46f"/></symbol>')
     s3 = (f'<symbol id="s3" overflow="visible"><g fill="currentColor">{petals(6,-4.4,2.7,4.6)}</g>'
@@ -79,22 +79,23 @@ def symbols():
     return s1 + s2 + s3 + s4
 
 def build(weeks, total):
-    W, H = 1000, 218
-    X0, Y0, STEP = 40, 54, 17.5
+    W, H = 1000, 222
+    STEP, Y0 = 17.5, 58
+    X0 = (W - len(weeks) * STEP) / 2
     counts = [c for w in weeks for _, c, _ in w]
     lv = levels(counts)
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Contribution garden: {total} contributions in the last year">']
     o.append('<defs><linearGradient id="gbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14232e"/><stop offset="1" stop-color="#1d3344"/></linearGradient>'
              + symbols() + '</defs>')
     o.append(f'<rect x="1" y="1" width="{W-2}" height="{H-2}" rx="14" fill="url(#gbg)" stroke="#3b5a6f" stroke-width="2"/>')
-    o.append(f'<text x="{X0}" y="34" font-family="Georgia,\'Times New Roman\',serif" font-size="17" fill="#9fb4c3"><tspan fill="#f08a5d" font-weight="700">{total:,}</tspan> contributions in the last year, grown into a garden</text>')
+    o.append(f'<text x="{f(X0)}" y="36" font-family="Georgia,\'Times New Roman\',serif" font-size="17" fill="#9fb4c3"><tspan fill="#f08a5d" font-weight="700">{total:,}</tspan> contributions in the last year, grown into a garden</text>')
 
     soil, plants, months = [], [], []
     last_m, last_col = None, -9
     for col, week in enumerate(weeks):
         x = X0 + col * STEP
         m = datetime.date.fromisoformat(week[0][0]).strftime("%b")
-        if m != last_m and col - last_col >= 3:
+        if m != last_m and col - last_col >= 3 and col < len(weeks) - 2:
             months.append(f'<text x="{f(x)}" y="{f(Y0+7*STEP+16)}" font-family="\'SFMono-Regular\',Consolas,Menlo,monospace" font-size="11" fill="#6f8798">{m}</text>')
             last_col = col
         last_m = m
@@ -107,7 +108,7 @@ def build(weeks, total):
                 continue
             h = zlib.crc32(date.encode())
             color = PALETTE[h % len(PALETTE)]
-            rot = (h >> 3) % 360
+            rot = (h >> 3) % 360 if L > 1 else 0
             amp = 3 + (h >> 9) % 5
             sdur = 5 + (h >> 12) % 40 / 10
             sbeg = ((h >> 16) % 50) / 10
@@ -121,12 +122,13 @@ def build(weeks, total):
     o.append('<g fill="#2a4558" opacity="0.9">' + "".join(soil) + '</g>')
     o.append("".join(plants))
     o.extend(months)
-    # legend
-    lx, ly = W - 40 - 150, Y0 + 7 * STEP + 12
-    o.append(f'<text x="{lx-8}" y="{ly+4}" text-anchor="end" font-family="\'SFMono-Regular\',Consolas,Menlo,monospace" font-size="11" fill="#6f8798">less</text>')
+    # legend, top right, clear of the month labels
+    mono = "font-family=\"'SFMono-Regular',Consolas,Menlo,monospace\" font-size=\"11\" fill=\"#6f8798\""
+    rx = X0 + len(weeks) * STEP
+    o.append(f'<text x="{f(rx)}" y="35" text-anchor="end" {mono}>more</text>')
     for i in range(4):
-        o.append(f'<use href="#s{i+1}" x="{lx + i*30 + 8}" y="{ly}" color="{PALETTE[i % len(PALETTE)]}"/>')
-    o.append(f'<text x="{lx+130}" y="{ly+4}" font-family="\'SFMono-Regular\',Consolas,Menlo,monospace" font-size="11" fill="#6f8798">more</text>')
+        o.append(f'<use href="#s{4-i}" x="{f(rx - 46 - i*26)}" y="31" color="{PALETTE[(3-i) % len(PALETTE)]}"/>')
+    o.append(f'<text x="{f(rx - 46 - 3*26 - 16)}" y="35" text-anchor="end" {mono}>less</text>')
     o.append('</svg>')
     return "\n".join(o)
 
