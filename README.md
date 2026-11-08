@@ -1,8 +1,9 @@
 
+
 <div align="center">
 
 <a href="https://nimd.me">
-  <img src="./assets/banner.svg" alt="Niranjan MD. Systems, infrastructure, software, research." width="100%">
+  <img src="./assets/banner.svg" alt="Niranjan MD. Systems, art, research, life." width="100%">
 </a>
 
 <a href="https://github.com/nimdme">
@@ -46,38 +47,26 @@ and occasionally breaking them to find out.
 ## What I spend my time on
 
 <table>
-  <tr>
-    <td width="50%" valign="top">
-
-**Systems and infrastructure**
-
-Linux, homelabs, and networking. I like the layer of a computer where things stop being magic and start being files, sockets, and processes you can poke at.
-
-    </td>
-    <td width="50%" valign="top">
-
-**Software and tools**
-
-Backend systems, plus small tools that solve problems I probably could have avoided. They usually turn into the best way to learn something.
-
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-
-**Research mindset**
-
-Read the docs, then read the source, then break it on purpose. If I can't explain how it works, I haven't finished learning it.
-
-    </td>
-    <td width="50%" valign="top">
-
-**Off the clock**
-
-Making music, drinking coffee, and writing in my journal. Some of that ends up on the [journal page](https://nimd.me/journal), most of it doesn't.
-
-    </td>
-  </tr>
+<tr>
+<td width="50%" valign="top">
+<h4>Systems and infrastructure</h4>
+<p>Linux, homelabs, and networking. I like the layer of a computer where things stop being magic and start being files, sockets, and processes you can poke at.</p>
+</td>
+<td width="50%" valign="top">
+<h4>Software and tools</h4>
+<p>Backend systems, plus small tools that solve problems I probably could have avoided. They usually turn into the best way to learn something.</p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<h4>Research mindset</h4>
+<p>Read the docs, then read the source, then break it on purpose. If I can't explain how it works, I haven't finished learning it.</p>
+</td>
+<td width="50%" valign="top">
+<h4>Off the clock</h4>
+<p>Making music, drinking coffee, and writing in my journal. Some of that ends up on the <a href="https://nimd.me/journal">journal page</a>, most of it doesn't.</p>
+</td>
+</tr>
 </table>
 
 <br>
@@ -94,19 +83,19 @@ Making music, drinking coffee, and writing in my journal. Some of that ends up o
 ## On GitHub
 
 <p align="center">
-  <img height="170" src="https://github-stats-extended.vercel.app/api?username=nimdme&show_icons=true&hide_border=true&bg_color=162632&title_color=f08a5d&text_color=fdebe5&icon_color=e8917f&ring_color=f08a5d" alt="GitHub stats">
-  <img height="170" src="https://github-stats-extended.vercel.app/api/top-langs/?username=nimdme&layout=compact&hide_border=true&bg_color=162632&title_color=f08a5d&text_color=fdebe5" alt="Top languages">
+  <img width="49%" src="https://github-stats-extended.vercel.app/api?username=nimdme&show_icons=true&hide_border=true&bg_color=162632&title_color=f08a5d&text_color=fdebe5&icon_color=e8917f&ring_color=f08a5d" alt="GitHub stats">
+  <img width="49%" src="https://streak-stats.demolab.com?user=nimdme&hide_border=true&background=162632&ring=f08a5d&fire=f08a5d&currStreakNum=fdebe5&currStreakLabel=f08a5d&sideNums=fdebe5&sideLabels=9fb4c3&dates=9fb4c3" alt="Contribution streak">
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=nimdme&hide_border=true&background=162632&ring=f08a5d&fire=f08a5d&currStreakNum=fdebe5&currStreakLabel=f08a5d&sideNums=fdebe5&sideLabels=9fb4c3&dates=9fb4c3" alt="Contribution streak">
+  <img width="49%" src="https://github-stats-extended.vercel.app/api/top-langs/?username=nimdme&layout=compact&card_width=467&hide_border=true&bg_color=162632&title_color=f08a5d&text_color=fdebe5" alt="Top languages">
 </p>
 
 <!-- Needs the snake.yml workflow in .github/workflows/ to generate the output branch -->
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nimdme/nimdme/output/github-snake-dark.svg">
-    <img alt="Contribution graph eaten by a snake" src="https://raw.githubusercontent.com/nimdme/nimdme/output/github-snake.svg">
+    <img width="100%" alt="Contribution graph eaten by a snake" src="https://raw.githubusercontent.com/nimdme/nimdme/output/github-snake.svg">
   </picture>
 </p>
 
