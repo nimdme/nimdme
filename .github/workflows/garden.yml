@@ -23,6 +23,12 @@ jobs:
       - name: Build the banner for today's season or festival
         run: python3 scripts/banner.py --out dist/banner.svg --readme README.md
 
+      - name: Build the stats panel
+        run: python3 scripts/stats.py --user nimdme --out dist/stats.svg
+        env:
+          # Your personal token (read:user; add repo for private-repo languages)
+          STATS_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GARDEN_TOKEN }}
+
       - name: Publish to the output branch
         uses: crazy-max/ghaction-github-pages@v3.2.0
         with:

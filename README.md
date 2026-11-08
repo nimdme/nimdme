@@ -1,4 +1,8 @@
-
+<!--
+  Put this file at the root of the repo named exactly like your username.
+  The banner is updated by .github/workflows/garden.yml
+  and published to the "output" branch; run that workflow once after setup.
+-->
 
 <div align="center">
 
@@ -95,12 +99,7 @@ and occasionally breaking them to find out.
 ## On GitHub
 
 <p align="center">
-  <img width="49%" src="https://github-stats-extended.vercel.app/api?username=nimdme&show_icons=true&card_width=495&hide_border=true&bg_color=162632&title_color=f08a5d&text_color=fdebe5&icon_color=e8917f&ring_color=f08a5d" alt="GitHub stats">
-  <img width="49%" src="https://streak-stats.demolab.com?user=nimdme&hide_border=true&background=162632&ring=f08a5d&fire=f08a5d&currStreakNum=fdebe5&currStreakLabel=f08a5d&sideNums=fdebe5&sideLabels=9fb4c3&dates=9fb4c3" alt="Contribution streak">
-</p>
-
-<p align="center">
-  <img width="49%" src="https://github-stats-extended.vercel.app/api/top-langs/?username=nimdme&layout=compact&card_width=495&hide_border=true&bg_color=162632&title_color=f08a5d&text_color=fdebe5" alt="Top languages">
+  <img width="100%" src="https://raw.githubusercontent.com/nimdme/nimdme/output/stats.svg" alt="My GitHub stats: contributions, commits, streaks and languages">
 </p>
 
 <p align="center">
