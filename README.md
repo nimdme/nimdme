@@ -1,9 +1,4 @@
-<!--
-  Setup: replace every nimdme below with your GitHub username.
-  Put this file at the root of the repo named exactly like your username.
-  The banner and contribution garden are built by .github/workflows/garden.yml
-  and published to the "output" branch; run that workflow once after setup.
--->
+
 
 <div align="center">
 
@@ -106,11 +101,6 @@ and occasionally breaking them to find out.
 
 <p align="center">
   <img width="49%" src="https://github-stats-extended.vercel.app/api/top-langs/?username=nimdme&layout=compact&card_width=495&hide_border=true&bg_color=162632&title_color=f08a5d&text_color=fdebe5" alt="Top languages">
-</p>
-
-<!-- Needs the garden.yml workflow in .github/workflows/ to generate the output branch -->
-<p align="center">
-  <img width="100%" src="https://raw.githubusercontent.com/nimdme/nimdme/output/contribution-garden.svg" alt="My contribution graph, grown into a garden of flowers">
 </p>
 
 <p align="center">

@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: profile-readme
+  cancel-in-progress: false
+
 jobs:
   garden:
     runs-on: ubuntu-latest
@@ -18,14 +22,6 @@ jobs:
 
       - name: Build the banner for today's season or festival
         run: python3 scripts/banner.py --out dist/banner.svg --readme README.md
-
-      - name: Build the garden
-        run: python3 scripts/garden.py --out dist/contribution-garden.svg
-        env:
-          # GARDEN_TOKEN (your own token) lets the garden count private contributions too.
-          # Without it, the built-in token only sees public ones.
-          GITHUB_TOKEN: ${{ secrets.GARDEN_TOKEN || secrets.GITHUB_TOKEN }}
-          GITHUB_USER: ${{ github.repository_owner }}
 
       - name: Publish to the output branch
         uses: crazy-max/ghaction-github-pages@v3.2.0
@@ -36,9 +32,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Runs after publishing, so the README never points at a banner that isn't live yet
-      - name: Update the README caption and banner version
+      - name: Commit README changes (festival caption, banner version)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git diff --cached --quiet || (git commit -m "Sync README with today's banner" && git pull --rebase && git push)
+          git diff --cached --quiet || (git commit -m "Update README for today's banner" && git pull --rebase && git push)
