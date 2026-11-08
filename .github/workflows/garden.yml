@@ -22,7 +22,9 @@ jobs:
       - name: Build the garden
         run: python3 scripts/garden.py --out dist/contribution-garden.svg
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GARDEN_TOKEN (your own token) lets the garden count private contributions too.
+          # Without it, the built-in token only sees public ones.
+          GITHUB_TOKEN: ${{ secrets.GARDEN_TOKEN || secrets.GITHUB_TOKEN }}
           GITHUB_USER: ${{ github.repository_owner }}
 
       - name: Publish to the output branch
