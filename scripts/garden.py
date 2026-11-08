@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Turn a GitHub contribution calendar into an animated SVG flower garden.
+"""Turn a GitHub contribution calendar into an animated night sky: each active day is a star,
+brighter on busier days, with streaks joined into constellations.
 
 Usage:
   GITHUB_TOKEN=... python3 scripts/garden.py --user USERNAME --out dist/contribution-garden.svg
@@ -7,7 +8,7 @@ Usage:
 """
 import argparse, datetime, json, math, os, random, sys, urllib.request, zlib
 
-PALETTE = ["#e8917f", "#9482e6", "#f2b45a", "#f2ab9a", "#8fb8cc"]  # coral, lavender, gold, blush, mist
+LEVEL_COLORS = {1: "#8fa6b4", 2: "#f2ab9a", 3: "#e8917f", 4: "#f08a5d"}  # bud, blush, coral, orange
 SAGE = "#78a894"
 QUERY = """query($login:String!){user(login:$login){contributionsCollection{contributionCalendar{
 totalContributions weeks{contributionDays{date contributionCount weekday}}}}}}"""
@@ -62,73 +63,106 @@ def levels(counts):
         return 4
     return lv
 
-def symbols():
-    def petals(n, cy, rx, ry, op=1, extra=""):
-        return "".join(f'<ellipse cx="0" cy="{f(cy)}" rx="{f(rx)}" ry="{f(ry)}" transform="rotate({f(k*360/n)})" opacity="{op}"{extra}/>' for k in range(n))
-    s1 = (f'<symbol id="s1" overflow="visible"><path d="M0,6 L0,-2" stroke="{SAGE}" stroke-width="1.4" stroke-linecap="round" fill="none"/>'
-          f'<ellipse cx="-2.6" cy="2.6" rx="2.6" ry="1.2" transform="rotate(-30 -2.6 2.6)" fill="{SAGE}"/>'
-          f'<ellipse cx="2.6" cy="1.4" rx="2.6" ry="1.2" transform="rotate(30 2.6 1.4)" fill="{SAGE}"/>'
-          f'<ellipse cx="0" cy="-4" rx="2.4" ry="3.2" fill="currentColor"/></symbol>')
-    s2 = (f'<symbol id="s2" overflow="visible"><g fill="currentColor">{petals(5,-3.4,2.2,3.6)}</g>'
-          f'<circle r="1.7" fill="#f6c46f"/></symbol>')
-    s3 = (f'<symbol id="s3" overflow="visible"><g fill="currentColor">{petals(6,-4.4,2.7,4.6)}</g>'
-          f'<g fill="#fff" opacity="0.28">{petals(6,-3.6,1.2,2.6)}</g><circle r="2.2" fill="#f6c46f"/></symbol>')
-    s4 = (f'<symbol id="s4" overflow="visible"><circle r="13" fill="currentColor" opacity="0.14"><animate attributeName="opacity" values="0.08;0.26;0.08" dur="3.6s" repeatCount="indefinite"/></circle>'
-          f'<g fill="currentColor">{petals(8,-5.4,2.9,5.6)}</g><g fill="currentColor" opacity="0.8" transform="rotate(22.5)">{petals(8,-3.8,2.2,3.8)}</g>'
-          f'<g fill="#fff" opacity="0.25">{petals(8,-4.4,1.1,3)}</g><circle r="2.8" fill="#f6c46f"/><circle r="1.2" fill="#7a3b1d" opacity="0.6"/></symbol>')
-    return s1 + s2 + s3 + s4
+def star_path(r, inner=0.28):
+    pts = []
+    for k in range(8):
+        ang = -math.pi / 2 + k * math.pi / 4
+        rr = r if k % 2 == 0 else r * inner
+        pts.append(f"{f(rr*math.cos(ang))},{f(rr*math.sin(ang))}")
+    return "M" + " L".join(pts) + "Z"
+
+STAR = {  # level: (core radius, sparkle size, colour, glow radius)
+    1: (1.5, 0, "#8fa6b4", 0),
+    2: (1.9, 0, "#dbe7f2", 5),
+    3: (1.6, 5.5, "#fdebe5", 7),
+    4: (2.0, 7.5, "#f6c46f", 10),
+}
+
+def star(L, extra=""):
+    core, sp, col, gl = STAR[L]
+    g = ""
+    if gl:
+        g += f'<circle r="{gl}" fill="url(#halo{L})"/>'
+    if sp:
+        g += f'<path d="{star_path(sp)}" fill="{col}"/>'
+    g += f'<circle r="{core}" fill="{col}"/>'
+    return g
 
 def build(weeks, total):
     W, H = 1000, 222
     STEP, Y0 = 17.5, 58
     X0 = (W - len(weeks) * STEP) / 2
-    counts = [c for w in weeks for _, c, _ in w]
-    lv = levels(counts)
-    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Contribution garden: {total} contributions in the last year">']
-    o.append('<defs><linearGradient id="gbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14232e"/><stop offset="1" stop-color="#1d3344"/></linearGradient>'
-             + symbols() + '</defs>')
-    o.append(f'<rect x="1" y="1" width="{W-2}" height="{H-2}" rx="14" fill="url(#gbg)" stroke="#3b5a6f" stroke-width="2"/>')
-    o.append(f'<text x="{f(X0)}" y="36" font-family="Georgia,\'Times New Roman\',serif" font-size="17" fill="#9fb4c3"><tspan fill="#f08a5d" font-weight="700">{total:,}</tspan> contributions in the last year, grown into a garden</text>')
+    days = [(d, c, wd, col) for col, w in enumerate(weeks) for d, c, wd in w]
+    lv = levels([c for _, c, _, _ in days])
+    pos = {d: (X0 + col * STEP + STEP / 2, Y0 + wd * STEP + STEP / 2) for d, c, wd, col in days}
 
-    soil, plants, months = [], [], []
+    # longest streak
+    best = cur = 0
+    for _, c, _, _ in days:
+        cur = cur + 1 if c > 0 else 0
+        best = max(best, cur)
+
+    mono = "font-family=\"'SFMono-Regular',Consolas,Menlo,monospace\" font-size=\"11\" fill=\"#6f8798\""
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Contribution sky: {total} contributions in the last year, longest streak {best} days">']
+    halos = "".join(f'<radialGradient id="halo{L}"><stop offset="0" stop-color="{STAR[L][2]}" stop-opacity="0.35"/><stop offset="1" stop-color="{STAR[L][2]}" stop-opacity="0"/></radialGradient>' for L in (2, 3, 4))
+    o.append('<defs><linearGradient id="gbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101d28"/><stop offset="1" stop-color="#1a2f40"/></linearGradient>'
+             '<linearGradient id="shoot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fdebe5" stop-opacity="0"/></linearGradient>'
+             + halos + '</defs>')
+    o.append(f'<rect x="1" y="1" width="{W-2}" height="{H-2}" rx="14" fill="url(#gbg)" stroke="#3b5a6f" stroke-width="2"/>')
+    o.append(f'<text x="{f(X0)}" y="36" font-family="Georgia,\'Times New Roman\',serif" font-size="17" fill="#9fb4c3">'
+             f'<tspan fill="#f08a5d" font-weight="700">{total:,}</tspan> contributions in the last year'
+             f'<tspan fill="#6f8798"> · longest streak {best} day{"s" if best != 1 else ""}</tspan></text>')
+
+    # faint dust for quiet days
+    o.append('<g fill="#2f4a5e" opacity="0.5">' + "".join(
+        f'<circle cx="{f(pos[d][0])}" cy="{f(pos[d][1])}" r="0.9"/>' for d, c, _, _ in days if c == 0) + '</g>')
+
+    # constellations: join consecutive active days
+    lines = []
+    for (d1, c1, _, col), (d2, c2, _, _) in zip(days, days[1:]):
+        if c1 > 0 and c2 > 0:
+            (x1, y1), (x2, y2) = pos[d1], pos[d2]
+            length = math.hypot(x2 - x1, y2 - y1)
+            lines.append(f'<line x1="{f(x1)}" y1="{f(y1)}" x2="{f(x2)}" y2="{f(y2)}" stroke-dasharray="{f(length)}" stroke-dashoffset="{f(length)}">'
+                         f'<animate attributeName="stroke-dashoffset" from="{f(length)}" to="0" begin="{f(1.2 + col*0.04)}s" dur="0.8s" fill="freeze"/></line>')
+    o.append('<g stroke="#8fa6b4" stroke-width="0.8" stroke-opacity="0.35" stroke-linecap="round">' + "".join(lines) + '</g>')
+
+    # stars: fade in left to right, then twinkle
+    for d, c, _, col in days:
+        L = lv(c)
+        if L == 0:
+            continue
+        x, y = pos[d]
+        h = zlib.crc32(d.encode())
+        tw = ""
+        if L >= 2:
+            dur = 2.5 + (h % 35) / 10
+            lo = 0.55 if L >= 3 else 0.7
+            tw = f'<animate attributeName="opacity" values="1;{lo};1" dur="{f(dur)}s" begin="{f((h >> 8) % 40 / 10)}s" repeatCount="indefinite"/>'
+        rot = (h >> 4) % 45 if L >= 3 else 0
+        o.append(f'<g transform="translate({f(x)},{f(y)})" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="{f(col*0.03)}s" dur="0.6s" fill="freeze"/>'
+                 f'<g transform="rotate({rot})">{tw}{star(L)}</g></g>')
+
+    # an occasional shooting star across the panel
+    o.append('<g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.7;0.71;0.74;0.76;1" dur="24s" repeatCount="indefinite"/>'
+             '<animateTransform attributeName="transform" type="translate" values="900,40;900,40;640,120;640,120" keyTimes="0;0.7;0.76;1" dur="24s" repeatCount="indefinite"/>'
+             '<g transform="rotate(-17)"><rect x="0" y="-0.6" width="70" height="1.2" rx="0.6" fill="url(#shoot)"/><circle r="1.4" fill="#fff"/></g></g>')
+
+    # month labels
     last_m, last_col = None, -9
     for col, week in enumerate(weeks):
-        x = X0 + col * STEP
         m = datetime.date.fromisoformat(week[0][0]).strftime("%b")
         if m != last_m and col - last_col >= 3 and col < len(weeks) - 2:
-            months.append(f'<text x="{f(x)}" y="{f(Y0+7*STEP+16)}" font-family="\'SFMono-Regular\',Consolas,Menlo,monospace" font-size="11" fill="#6f8798">{m}</text>')
+            o.append(f'<text x="{f(X0 + col*STEP)}" y="{f(Y0+7*STEP+16)}" {mono}>{m}</text>')
             last_col = col
         last_m = m
-        for date, c, wd in week:
-            y = Y0 + wd * STEP + STEP / 2
-            cx = x + STEP / 2
-            L = lv(c)
-            if L == 0:
-                soil.append(f'<circle cx="{f(cx)}" cy="{f(y)}" r="1.5"/>')
-                continue
-            h = zlib.crc32(date.encode())
-            color = PALETTE[h % len(PALETTE)]
-            rot = (h >> 3) % 360 if L > 1 else 0
-            amp = 3 + (h >> 9) % 5
-            sdur = 5 + (h >> 12) % 40 / 10
-            sbeg = ((h >> 16) % 50) / 10
-            delay = col * 0.035 + ((h >> 20) % 30) / 100
-            sway = (f'<animateTransform attributeName="transform" type="rotate" values="{-amp};{amp};{-amp}" dur="{f(sdur)}s" begin="{f(sbeg)}s" '
-                    f'repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>')
-            grow = (f'<animateTransform attributeName="transform" type="scale" values="0;1.15;1" keyTimes="0;0.65;1" dur="0.9s" begin="{f(delay)}s" fill="freeze" '
-                    f'calcMode="spline" keySplines="0.3 0 0.4 1;0.4 0 0.6 1"/>')
-            plants.append(f'<g transform="translate({f(cx)},{f(y)})"><g transform="scale(0)">{grow}<g>{sway}'
-                          f'<use href="#s{L}" color="{color}" transform="rotate({rot})"/></g></g></g>')
-    o.append('<g fill="#2a4558" opacity="0.9">' + "".join(soil) + '</g>')
-    o.append("".join(plants))
-    o.extend(months)
-    # legend, top right, clear of the month labels
-    mono = "font-family=\"'SFMono-Regular',Consolas,Menlo,monospace\" font-size=\"11\" fill=\"#6f8798\""
+
+    # legend
     rx = X0 + len(weeks) * STEP
     o.append(f'<text x="{f(rx)}" y="35" text-anchor="end" {mono}>more</text>')
-    for i in range(4):
-        o.append(f'<use href="#s{4-i}" x="{f(rx - 46 - i*26)}" y="31" color="{PALETTE[(3-i) % len(PALETTE)]}"/>')
-    o.append(f'<text x="{f(rx - 46 - 3*26 - 16)}" y="35" text-anchor="end" {mono}>less</text>')
+    for i, L in enumerate((4, 3, 2, 1)):
+        o.append(f'<g transform="translate({f(rx - 44 - i*22)},31)">{star(L)}</g>')
+    o.append(f'<text x="{f(rx - 44 - 3*22 - 14)}" y="35" text-anchor="end" {mono}>less</text>')
     o.append('</svg>')
     return "\n".join(o)
 
