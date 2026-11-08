@@ -19,13 +19,6 @@ jobs:
       - name: Build the banner for today's season or festival
         run: python3 scripts/banner.py --out dist/banner.svg --readme README.md
 
-      - name: Commit the festival caption if it changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git diff --cached --quiet || (git commit -m "Update festival caption" && git push)
-
       - name: Build the garden
         run: python3 scripts/garden.py --out dist/contribution-garden.svg
         env:
@@ -39,3 +32,11 @@ jobs:
           build_dir: dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Runs after publishing, so the README never points at a banner that isn't live yet
+      - name: Update the README caption and banner version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || (git commit -m "Sync README with today's banner" && git pull --rebase && git push)

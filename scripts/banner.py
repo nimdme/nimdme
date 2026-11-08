@@ -412,7 +412,10 @@ def build(theme):
     a('</svg>')
     return "\n".join(o)
 
-def update_readme(path, theme):
+def update_readme(path, theme, day):
+    """Keep the README in step with the banner: set the festival caption and give the
+    banner URL a version tag, so GitHub's image cache fetches the new banner at the same
+    moment the caption changes."""
     t = THEMES[theme]
     body = ""
     if t.get("caption"):
@@ -420,11 +423,14 @@ def update_readme(path, theme):
                 f'<a href="{t["wiki"]}">Read more on Wikipedia</a></sub></p>')
     with open(path, encoding="utf-8") as fh:
         text = fh.read()
+    if "<!-- festival:start -->" not in text:
+        print("::warning::README has no <!-- festival:start --> / <!-- festival:end --> markers; caption not updated.")
     new = re.sub(r"(<!-- festival:start -->).*?(<!-- festival:end -->)", lambda m: m.group(1) + ("\n" + body + "\n" if body else "") + m.group(2), text, flags=re.S)
+    new = re.sub(r"(output/banner\.svg)(\?v=[\w-]+)?", lambda m: f"{m.group(1)}?v={theme}-{day.year}", new)
     if new != text:
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(new)
-        print(f"updated festival caption in {path}")
+        print(f"updated README for {theme}")
 
 def main():
     ap = argparse.ArgumentParser()
@@ -440,7 +446,7 @@ def main():
     with open(a.out, "w", encoding="utf-8") as fh:
         fh.write(build(theme))
     if a.readme:
-        update_readme(a.readme, theme)
+        update_readme(a.readme, theme, today)
     print(f"wrote {a.out} ({theme})")
 
 if __name__ == "__main__":
