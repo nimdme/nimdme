@@ -8,7 +8,7 @@
 <div align="center">
 
 <a href="https://nimd.me">
-  <img src="https://raw.githubusercontent.com/nimdme/nimdme/output/banner.svg" alt="Niranjan MD. Systems, art, research, life." width="100%">
+  <img src="https://raw.githubusercontent.com/nimdme/nimdme/output/banner.svg?v=deepavali-2026" alt="Niranjan MD. Systems, art, research, life." width="100%">
 </a>
 
 <!-- festival:start -->
